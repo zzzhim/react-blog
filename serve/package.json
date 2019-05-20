@@ -1,0 +1,21 @@
+{
+    "name": "serve",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "start": "nodemon ./index.js"
+    },
+    "dependencies": {
+        "jsonwebtoken": "^8.5.1",
+        "koa": "^2.7.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-cors": "^0.0.16",
+        "koa-logger": "^3.2.0",
+        "koa-router": "^7.4.0",
+        "mysql": "^2.17.1"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.0"
+    }
+}
