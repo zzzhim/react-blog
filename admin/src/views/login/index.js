@@ -1,10 +1,19 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-05-20 23:51:23
+ * @LastEditTime: 2019-05-21 01:09:54
+ * @LastEditors: Please set LastEditors
+ */
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
 import {
     Form,
     Icon,
     Input,
     Button
 } from 'antd'
+import { actionCreators } from './store'
 
 import style from './style.module.scss'
 
@@ -21,28 +30,24 @@ class Login extends Component {
         this.handleChangePassword = this.handleChangePassword.bind(this)
     }
 
-    componentDidMount() {
-    }
-
     render() {
-        const { username, password } = this.state
         return (
             <Fragment>
                 <div className={ style.login }>
                     <section className={ style.section }>
                         <Form
                             labelAlign="left"
-                            onSubmit={this.handleSubmit}
+                            onSubmit={ (e) => this.handleSubmit(e, this.username, this.password)}
                             className="login-form">
                             <Form.Item
                                 label="name"
                                 >
                                 <Input
                                     size="large"
+                                    defaultValue={ 'admin' }
                                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder="Username"
-                                    value={ username }
-                                    onChange={ this.handleChangeUsername }
+                                    ref={ input => { this.username = input } } 
                                 />
                             </Form.Item>
                             <Form.Item
@@ -50,11 +55,11 @@ class Login extends Component {
                                 >
                                 <Input
                                     size="large"
+                                    defaultValue={ 'wangyafei1007' }
                                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     type="password"
                                     placeholder="Password"
-                                    value={ password }
-                                    onChange={ this.handleChangePassword}
+                                    ref={ input => { this.password = input } }
                                 />
                             </Form.Item>
                             <Form.Item className={ style['login-btn'] }>
@@ -74,9 +79,9 @@ class Login extends Component {
         )
     }
 
-    handleSubmit(e) {
+    handleSubmit(e, username, password) {
         e.preventDefault()
-        console.log(this.state)
+        this.props.login(username.state.value, password.state.value)
     }
 
     handleChangeUsername(e) {
@@ -92,4 +97,15 @@ class Login extends Component {
     }
 }
 
-export default Login
+const mapState = state => ({
+
+})
+
+const mapDispatch = dispatch => ({
+    login(username, password) {
+        dispatch(actionCreators.login(username, password))
+    }
+})
+
+
+export default connect(mapState, mapDispatch)(Login)
