@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import store from '../store'
 import Home from '../views/home'
+import Login from '../views/login'
 
 const redirect = (props) => {
     return (
@@ -17,6 +18,7 @@ class App extends Component {
                 <BrowserRouter>
                     <Route exact path="/" component={ redirect }></Route>
                     <Route exact path="/home" component={ Home }></Route>
+                    <Route exact path="/login" component={ Login }></Route>
                 </BrowserRouter>
             </Provider>
         )
