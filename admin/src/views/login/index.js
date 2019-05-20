@@ -7,7 +7,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>login</div>
+            <div className="color">login</div>
         )
     }
 }
