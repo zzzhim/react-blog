@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import store from '../store'
 import Home from '../views/home'
 import Login from '../views/login'
+import '../styles/reset.css'
+import 'antd/dist/antd.css'
 
 const redirect = (props) => {
     return (
