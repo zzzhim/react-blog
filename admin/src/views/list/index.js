@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import style from './style.module.scss'
 
-class List extends Component {
+class List extends PureComponent {
     render() {
         return (
             <div className={ style.color }>home</div>

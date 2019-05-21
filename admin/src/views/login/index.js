@@ -5,7 +5,7 @@
  * @LastEditTime: 2019-05-21 01:09:54
  * @LastEditors: Please set LastEditors
  */
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import {
@@ -18,7 +18,7 @@ import { actionCreators } from './store'
 
 import style from './style.module.scss'
 
-class Login extends Component {
+class Login extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {}

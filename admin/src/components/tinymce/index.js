@@ -18,7 +18,7 @@ class Release extends Component {
                             language_url: 'https://cdn.jsdelivr.net/npm/tinymce-lang/langs/zh_CN.js',
                             height: 700,
                             media_live_embeds: true,
-                            images_upload_url: '/asdsd',
+                            images_upload_url: 'http://localhost:8000/api/admin/uploadImage',
                             automatic_uploads: false,
                         }}
                         toolbar={

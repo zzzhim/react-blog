@@ -53,6 +53,10 @@ class AdminController {
             ctx.body = Object.assign(data, { data: '密码格式不正确' });
         };
     }
+
+    async release(ctx) {
+        console.log(ctx.request.body)
+    }
 };
 
 module.exports = new AdminController();

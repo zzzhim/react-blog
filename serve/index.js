@@ -8,6 +8,7 @@
 
 const koa = require('koa');
 const bodyParser  = require('koa-bodyparser');
+const koaBetterBody  = require('koa-better-body')
 const logger = require('koa-logger');
 const cors = require('koa-cors');
 const router = require('./router/index.js');
@@ -18,6 +19,7 @@ app
     .use(logger())
     .use(cors())
     .use(bodyParser())
+    .use(koaBetterBody())
     .use(router.routes())
 ;
 
