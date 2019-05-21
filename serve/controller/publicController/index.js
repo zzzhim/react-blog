@@ -1,5 +1,12 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-05-22 00:17:02
+ * @LastEditTime: 2019-05-22 01:34:38
+ * @LastEditors: Please set LastEditors
+ */
 const fs = require('fs')
-
+const uploadQiniu = require('./uploadQiniu')
 
 class PublicController {
     uploadImage(ctx) {
@@ -17,6 +24,8 @@ class PublicController {
                 console.log(err);
             })
         }
+
+        uploadQiniu()
 
         if(files instanceof Array){
             for(let file of files){
