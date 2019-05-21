@@ -1,0 +1,1 @@
+export const tokenName = 'my_blog'

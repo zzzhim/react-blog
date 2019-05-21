@@ -8,7 +8,7 @@
 
 import * as constants from './constants'
 import { message } from 'antd'
-import axios from 'axios'
+import { request } from '../../../utils'
 
 const changeLogin = ({ token, username}) => ({
     type: constants.CHANGE_LOGIN,
@@ -20,20 +20,24 @@ const changeLogin = ({ token, username}) => ({
 
 export const login = (username, password) => {
     return (dispatch) => {
-        axios.post('http://localhost:8000/api/admin/login', {
-            username,
-            password
+        request({
+            url: '/login',
+            method: 'post',
+            data: {
+                username,
+                password
+            }
+        }).then(res => {
+            const { data, status } = res.data
+            if(status === 200) {
+                // 派发
+                dispatch(changeLogin(data))
+            }else {
+                message.error(data)
+            }
         })
-            .then(res => {
-                const { data, status } = res.data
-                if(status === 200) {
-                    dispatch(changeLogin(data))
-                }else {
-                    message.error(data)
-                }
-            })
-            .catch(err => {
-                message.success(err)
-            })
+        .catch(err => {
+            console.log(err)
+        })
     }
 }
