@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import store from '../store'
-import Home from '../views/home'
+import Layout from '../views/layout'
 import Login from '../views/login'
 import '../styles/reset.css'
 import 'antd/dist/antd.css'
@@ -19,7 +19,7 @@ class App extends Component {
             <Provider store={ store }>
                 <BrowserRouter>
                     <Route exact path="/" component={ redirect }></Route>
-                    <Route exact path="/home" component={ Home }></Route>
+                    <Route path="/layout" component={ Layout }></Route>
                     <Route exact path="/login" component={ Login }></Route>
                 </BrowserRouter>
             </Provider>

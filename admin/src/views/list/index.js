@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import style from './index.module.scss'
+import style from './style.module.scss'
 
-class Home extends Component {
+class List extends Component {
     render() {
         return (
             <div className={ style.color }>home</div>
@@ -9,4 +9,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default List

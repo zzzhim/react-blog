@@ -1228,6 +1228,13 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
+"@tinymce/tinymce-react@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-react/-/tinymce-react-3.1.1.tgz#13ca3f988cbe6bfb9c67649ae6f986648b73aa73"
+  integrity sha512-ym9Qq8WP/3cU4o3c52mqAmHqUA9XkHVWPRptyw1OjyA+AwbxGzOuXfG19Bje4q97VfzBxMUq984M7bvbXCK2ag==
+  dependencies:
+    prop-types "^15.6.2"
+
 "@types/babel__core@^7.1.0":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.1.tgz#ce9a9e5d92b7031421e1d0d74ae59f572ba48be6"
