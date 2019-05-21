@@ -8,9 +8,12 @@
 
 import { combineReducers } from 'redux-immutable'
 import { reducer as loginReducer }  from '../views/login/store'
+import { reducer as releaseReducer }  from '../views/release/store'
+
 // 生成一个不可更改对象
 const reducer = combineReducers({
-    login: loginReducer
+    login: loginReducer,
+    release: releaseReducer
 })
 
 export default reducer

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-// import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Menu, Icon } from 'antd'
 const SubMenu = Menu.SubMenu
 
@@ -26,12 +26,43 @@ class Aside extends Component {
                             </span>
                         }
                         >
-                        <Menu.Item key="list">列表</Menu.Item>
-                        <Menu.Item key="release">发布文章</Menu.Item>
+                        <Menu.Item key="list">
+                            <Link
+                                to={{
+                                    pathname: "/layout/list",
+                                    search: "",
+                                    hash: "",
+                                    state: { fromDashboard: true }
+                                }}
+                                >
+                                列表
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="release">
+                            <Link
+                                to={{
+                                    pathname: "/layout/release",
+                                    search: "",
+                                    hash: "",
+                                    state: { fromDashboard: true }
+                                }}
+                                >
+                                发布文章
+                            </Link>
+                        </Menu.Item>
                     </SubMenu>
                     <Menu.Item key="about">
-                        <Icon type="pie-chart" />
-                        <span>关于我</span>
+                        <Link
+                            to={{
+                                pathname: "/layout/about",
+                                search: "",
+                                hash: "",
+                                state: { fromDashboard: true }
+                            }}
+                            >
+                            <Icon type="pie-chart" />
+                            <span>关于我</span>
+                        </Link>
                     </Menu.Item>
                 </Menu>
             </Fragment>

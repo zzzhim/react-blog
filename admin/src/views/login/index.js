@@ -26,6 +26,7 @@ class Login extends Component {
 
     render() {
         const { token } = this.props
+
         if(token.length === 0) {
             return (
                 <Fragment>
@@ -43,7 +44,7 @@ class Login extends Component {
                                         defaultValue={ 'admin' }
                                         prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                         placeholder="Username"
-                                        ref={ input => { this.username = input } } 
+                                        ref={ input => { this.username = input } }
                                     />
                                 </Form.Item>
                                 <Form.Item

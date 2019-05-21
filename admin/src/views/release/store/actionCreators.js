@@ -8,11 +8,14 @@
 
 import * as constants from './constants'
 
-
-const changeLogin = ({ token, username}) => ({
-    type: constants.CHANGE_LOGIN,
-    value: {
-        token,
-        username
-    }
+const changeTitle = (value) => ({
+    type: constants.CHANGE_TITLE,
+    value
 })
+
+
+export const handleChangeTitle = (value) => {
+    return dispatch => {
+        dispatch(changeTitle(value))
+    }
+}
