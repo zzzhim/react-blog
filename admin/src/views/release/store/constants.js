@@ -13,3 +13,5 @@ export const CHANGE_TAGS = 'release/change_tags'
 export const CHANGE_INTRODUCTION = 'release/change_introduction'
 
 export const CHANGE_EDITOR = 'release/change_editor'
+
+export const WILL_UNMOUNT = 'release/change_will_unmount'

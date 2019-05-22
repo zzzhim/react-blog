@@ -90,6 +90,10 @@ class Release extends PureComponent {
         )
     }
 
+    componentWillUnmount() {
+        this.props.handleWillUnmount()
+    }
+
     handleChangeTag(e) {
         this.setState({
             tag: e.target.value
@@ -98,6 +102,7 @@ class Release extends PureComponent {
 
     handleChangeTags(value) {
         const tags  = this.props.tags
+
         if(!tags.includes(value) && tags.size < 5) {
             this.props.handleChangeTags(value)
         }else {
@@ -113,9 +118,7 @@ class Release extends PureComponent {
             Introduction,
             content
         }).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log(err)
+            this.props.history.push('/layout/list')
         })
     }
 }
@@ -139,6 +142,9 @@ const mapDispatch = dispatch => ({
     },
     handleChangeEditor(content) {
         dispatch(actionCreators.handleChangeEditor(content))
+    },
+    handleWillUnmount() {
+        dispatch(actionCreators.handleWillUnmount)
     }
 })
 

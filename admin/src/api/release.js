@@ -1,4 +1,5 @@
 import { request } from '../utils'
+import { message } from 'antd';
 
 export default (data) => {
     return new Promise((resolve, reject) => {
@@ -7,9 +8,17 @@ export default (data) => {
             method: 'post',
             data
         }).then(res => {
-            // resolve(res)
+            console.log(res)
+            const { status, data } = res.data
+
+            if(status === 200) {
+                message.success(data)
+                resolve(data)
+            }else {
+                message.error(data)
+            }
         }).catch(err => {
-            // reject(err)
+            console.log(err)
         })
     })
 }

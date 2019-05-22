@@ -30,6 +30,8 @@ export default (state = defaultState, action) => {
             return state.set('Introduction', action.value)
         case constants.CHANGE_EDITOR:
             return state.set('content', action.value)
+        case constants.WILL_UNMOUNT:
+            return defaultState
         default:
             return state
     }

@@ -52,3 +52,7 @@ export const handleChangeEditor = content => {
         dispatch(Editor(content))
     }
 }
+
+export const handleWillUnmount = {
+    type: constants.WILL_UNMOUNT
+}
