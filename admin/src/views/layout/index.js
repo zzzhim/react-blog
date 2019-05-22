@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-05-21 22:14:50
+ * @LastEditTime: 2019-05-23 01:44:07
+ * @LastEditors: Please set LastEditors
+ */
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { Layout, Button, Icon } from 'antd'
@@ -18,6 +25,7 @@ class Layouts extends Component {
     }
 
     render() {
+
         return (
             <Fragment>
                 <Layout>
@@ -30,7 +38,8 @@ class Layouts extends Component {
                         <Aside />
                     </Sider>
                     <Layout>
-                        <Header style={{ background: '#fff' }}>Header</Header>
+                        <Header style={{ background: '#fff' }}>
+                        </Header>
                         <Content>
                             <Route exact path="/layout/list" component={ List }></Route>
                             <Route exact path="/layout/release" component={ Release }></Route>

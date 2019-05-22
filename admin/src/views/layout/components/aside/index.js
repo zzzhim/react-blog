@@ -1,15 +1,30 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-05-21 22:14:50
+ * @LastEditTime: 2019-05-23 01:40:29
+ * @LastEditors: Please set LastEditors
+ */
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { createBrowserHistory  } from 'history'
 import { Menu, Icon } from 'antd'
 const SubMenu = Menu.SubMenu
 
 class Aside extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
     render() {
+        const history = createBrowserHistory()
+
         return (
             <Fragment>
                 <Menu
                     style={{ minHeight: 'calc(100vh - 64px)' }}
-                    defaultSelectedKeys={[]}
+                    defaultSelectedKeys={[history.location.pathname]}
                     defaultOpenKeys={['article']}
                     mode="inline"
                     >
@@ -26,38 +41,38 @@ class Aside extends Component {
                             </span>
                         }
                         >
-                        <Menu.Item key="list">
+                        <Menu.Item key="/layout/list">
                             <Link
                                 to={{
                                     pathname: "/layout/list",
                                     search: "",
                                     hash: "",
-                                    state: { fromDashboard: true }
+                                    state: { name: '文章列表' }
                                 }}
                                 >
                                 列表
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="release">
+                        <Menu.Item key="/layout/release">
                             <Link
                                 to={{
                                     pathname: "/layout/release",
                                     search: "",
                                     hash: "",
-                                    state: { fromDashboard: true }
+                                    state: { name: '发布文章' }
                                 }}
                                 >
                                 发布文章
                             </Link>
                         </Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="about">
+                    <Menu.Item key="/layout/about">
                         <Link
                             to={{
                                 pathname: "/layout/about",
                                 search: "",
                                 hash: "",
-                                state: { fromDashboard: true }
+                                state: { name: '关于我' }
                             }}
                             >
                             <Icon type="pie-chart" />
