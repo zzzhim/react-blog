@@ -16,15 +16,16 @@ class Release extends Component {
                         init={{
                             language: 'zh_CN',
                             language_url: 'https://cdn.jsdelivr.net/npm/tinymce-lang/langs/zh_CN.js',
-                            height: 700,
+                            height: 800,
                             media_live_embeds: true,
                             images_upload_url: 'http://localhost:8000/api/admin/uploadImage',
-                            automatic_uploads: false,
+                            images_reuse_filename: true,
+                            automatic_uploads: true
                         }}
                         toolbar={
                             [
                                 'fullscreen | preview | fullpage',
-                                'undo redo | styleselect | bold italic | link image | media | charmap',
+                                'undo redo | styleselect | bold italic | link image | charmap',
                                 'alignleft aligncenter alignright',
                                 'wordcount',
                             ]

@@ -16,6 +16,4 @@ module.exports = {
     },
     dbName: 'my_blog',
     secret: 'wang',
-    access_key: '9GKuGYgZq-nEUymyv4jJo5rXjDGKN7j9fyCdhf0b',
-    secret_key: 'GdxR0vA0jCm7O9G9BpBr-zpW_3XbrkGJo6nWZ_g-'
 };

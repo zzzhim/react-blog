@@ -5,53 +5,77 @@
  * @LastEditTime: 2019-05-22 01:34:38
  * @LastEditors: Please set LastEditors
  */
-const fs = require('fs')
-const uploadQiniu = require('./uploadQiniu')
+const fs = require('fs');
+const OSS = require('ali-oss');
+const nanoid = require('nanoid')
+const { access_key, secret_key, bucket, region } = require('../../config/oss.config.js')
 
 class PublicController {
-    uploadImage(ctx) {
-        const files = ctx.request.files
 
-        const path = __dirname + '\\static'
+    static upload(fileName, stream) {
+        return new Promise((resolve, reject) => {
+            return (async () => {
+                const client = new OSS({
+                    region: region,
+                    accessKeyId: access_key,
+                    accessKeySecret: secret_key,
+                    bucket: bucket
+                });
 
-        try {
-            fs.readdirSync(path, (err, files)=>{
-                console.log(err)
-            })
-        }catch(error) {
-             //创建
-             fs.mkdirSync(path, (err)=>{
-                console.log(err);
-            })
-        }
+                try {
+                    const result = await client.putStream(nanoid()+ Date.now() + fileName, stream);
+                    resolve(result);
+                } catch (e) {
+                    reject(e);
+                };
+            })();
+        })
 
-        uploadQiniu()
+    }
+
+    async uploadImage(ctx) {
+        const files = ctx.request.files;
 
         if(files instanceof Array){
             for(let file of files){
                 let reader = fs.createReadStream(file.path);
-                let filename = file.name;
-                let newPath = path + "\\" + filename;
-                let writer = fs.createWriteStream(newPath);
-                reader.pipe(writer);
-                ctx.body = {
-                    a: 200
-                };
-            }
+                let fileName = file.name;
+                await PublicController.upload(fileName, reader)
+                    .then(res => {
+                        // ctx.body = {
+                        //     static: 200,
+                        //     data: {
+                        //         url: res.url
+                        //     }
+                        // };
+                        ctx.body = {
+                            "location": res.url
+                        };
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        ctx.body = {
+                            static: 500
+                        };
+                    })
+            };
         }else{
             //单个文件的情况
-            //console.log(files);
             let reader = fs.createReadStream(files.path);
-            let filename = file.name;
-            let newPath = __dirname + '\\uploads\\' + filename;
-            let writer = fs.createWriteStream(newPath);
-            reader.pipe(writer);
-            let data = {
-                message:'文件上传成功',
-                imgSrc:filename
-            }
-            ctx.body = data;//直接传递一个对象给前端浏览器
-        }
+            let fileName = file.name;
+            PublicController.upload(fileName, reader)
+                .then(res => {
+                    ctx.body = {
+                        "location": res.url
+                    };
+                })
+                .catch(err => {
+                    console.log(err)
+                    ctx.body = {
+                        static: 500
+                    };
+                })
+        };
     }
 }
 
