@@ -55,7 +55,35 @@ class AdminController {
     }
 
     async release(ctx) {
-        console.log(ctx.request.body)
+        const { title, tags, Introduction, content } = ctx.request.body;
+
+        if(title && tags && Introduction && content) {
+            try {
+                await adminUserModel.insertArticle({
+                    title,
+                    tags,
+                    Introduction,
+                    content
+                });
+                ctx.body = {
+                    status: 200,
+                    sussecc: '成功',
+                    data: '文章发布成功'
+                };
+            }catch(err) {
+                ctx.body = {
+                    status: 500,
+                    sussecc: '失败',
+                    data: 'error code 500'
+                };
+            }
+        }else {
+            ctx.body = {
+                status: 401,
+                sussecc: '失败',
+                data: '验证不通过'
+            };
+        };
     }
 };
 

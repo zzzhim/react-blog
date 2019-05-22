@@ -7,10 +7,9 @@ export default (data) => {
             method: 'post',
             data
         }).then(res => {
-            console.log(res)
-            resolve(true)
+            // resolve(res)
         }).catch(err => {
-            reject(false)
+            // reject(err)
         })
     })
 }
