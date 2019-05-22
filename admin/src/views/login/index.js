@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-20 23:51:23
- * @LastEditTime: 2019-05-21 01:09:54
+ * @LastEditTime: 2019-05-22 21:03:35
  * @LastEditors: Please set LastEditors
  */
 import React, { PureComponent, Fragment } from 'react'
@@ -76,7 +76,7 @@ class Login extends PureComponent {
             )
         }else {
             return (
-                <Redirect to="/home" />
+                <Redirect to="/layout/list" />
             )
         }
     }
