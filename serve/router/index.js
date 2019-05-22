@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-20 23:51:23
- * @LastEditTime: 2019-05-22 21:00:45
+ * @LastEditTime: 2019-05-22 23:25:41
  * @LastEditors: Please set LastEditors
  */
 const Router = require('koa-router');
@@ -27,6 +27,7 @@ router
 router
     .post('/admin/login', AdminController.login)
     .post('/admin/release', checkToken, AdminController.release)
+    .post('/admin/is_show', checkToken, AdminController.is_show)
 ;
 
 module.exports = router;

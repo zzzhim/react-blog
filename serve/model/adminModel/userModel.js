@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-05-20 23:51:23
+ * @LastEditTime: 2019-05-22 23:33:25
+ * @LastEditors: Please set LastEditors
+ */
 // 引入封装的查询语句
 const query = require('../../utils/query');
 
@@ -17,6 +24,10 @@ class UserModel {
 
     async getArticleTotal() {
         return await query(`SELECT id FROM ARTICLE`)
+    }
+
+    async is_show(id, is_show) {
+        return await query(`UPDATE ARTICLE SET is_show='${is_show}' WHERE id=${id}`)
     }
 };
 

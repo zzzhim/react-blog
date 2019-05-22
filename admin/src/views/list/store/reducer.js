@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-21 00:50:33
- * @LastEditTime: 2019-05-21 01:10:30
+ * @LastEditTime: 2019-05-23 00:03:08
  * @LastEditors: Please set LastEditors
  */
 
@@ -31,6 +31,9 @@ export default (state = defaultState, action) => {
                 'articleList': action.value.data.list,
                 'total': action.value.data.total,
             })
+        case constants.CHANGE_RELEASE:
+            state.get('articleList')[action.value.index] = Object.assign(state.get('articleList')[action.value.index], { is_show: action.value.is_show })
+            return state.set('articleList', [ ...state.get('articleList') ])
         default:
             return state
     }

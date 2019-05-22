@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-21 00:50:44
- * @LastEditTime: 2019-05-21 01:18:57
+ * @LastEditTime: 2019-05-22 23:44:38
  * @LastEditors: Please set LastEditors
  */
 import { request } from '../../../utils'
@@ -61,5 +61,31 @@ export const handleChangePage = (params) => {
                     }
                 })
             })
+    }
+}
+
+export const handleRelease = (data) => {
+    return dispatch => {
+        request({
+            url: '/is_show',
+            method: 'post',
+            data
+        }).then(res => {
+            const { status, data: value } = res.data
+            if(status === 200) {
+                dispatch({
+                    type: constants.CHANGE_RELEASE,
+                    value: {
+                        ...value,
+                        index: data.index
+                    }
+                })
+                message.success(res.data.message)
+            }else {
+                message.error(res.data.message)
+            }
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }

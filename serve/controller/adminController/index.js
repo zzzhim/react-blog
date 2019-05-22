@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-20 23:51:23
- * @LastEditTime: 2019-05-21 01:17:06
+ * @LastEditTime: 2019-05-22 23:37:56
  * @LastEditors: Please set LastEditors
  */
 const adminUserModel = require('../../model/adminModel/userModel.js');
@@ -84,6 +84,29 @@ class AdminController {
                 data: '验证不通过'
             };
         };
+    }
+
+    async is_show(ctx) {
+        const { id, is_show } = ctx.request.body;
+
+        try {
+            await adminUserModel.is_show(id, is_show === 0 ? 1 : 0);
+            ctx.body = {
+                status: 200,
+                message: is_show === 0 ? '文章已发布' : '文章已取消发布',
+                data: {
+                    id,
+                    is_show: is_show === 0 ? 1 : 0
+                }
+            };
+        }catch(err) {
+            ctx.body = {
+                status: 500,
+                sussecc: '失败',
+                message: 'error code 500',
+                data: 'error code 500'
+            };
+        }
     }
 };
 

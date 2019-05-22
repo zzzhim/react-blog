@@ -1,9 +1,17 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-05-21 22:14:50
+ * @LastEditTime: 2019-05-23 00:22:30
+ * @LastEditors: Please set LastEditors
+ */
 /* eslint-disable no-script-url */
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Table, Divider, Tag, Button } from 'antd'
+import { Table, Divider, Tag, Button, Modal } from 'antd'
 import style from './style.module.scss'
 import { actionCreators } from './store'
+import dayjs from 'dayjs'
 
 class List extends PureComponent {
     constructor(props) {
@@ -20,14 +28,15 @@ class List extends PureComponent {
     }
 
     render() {
-        const { current, pageSize, list, total, handleChangePage } = this.props
+        const { current, pageSize, list, total, handleChangePage, handleRelease } = this.props
 
         const columns = [
             {
                 title: 'id',
                 dataIndex: 'key',
                 key: 'key',
-                align: 'center'
+                align: 'center',
+                sorter: (a, b) => a.id - b.id
             },
             {
                 title: '标题',
@@ -67,14 +76,16 @@ class List extends PureComponent {
                 dataIndex: 'create_time',
                 align: 'center',
                 key: 'create_time',
-                sorter: (a, b) => a.age - b.age
+                sorter: (a, b) => dayjs(a.create_time).unix() - dayjs(b.create_time).unix(),
+                render: create_time => (<span>{ dayjs(create_time).format('YYYY-MM-DD HH:mm:ss') }</span>)
             },
             {
                 title: '最近更新',
                 dataIndex: 'update_time',
                 align: 'center',
                 key: 'update_time',
-                sorter: (a, b) => a.age - b.age
+                sorter: (a, b) => dayjs(a.create_time).unix() - dayjs(b.create_time).unix(),
+                render: update_time => (<span>{ dayjs(update_time).format('YYYY-MM-DD HH:mm:ss') }</span>)
             },
             {
                 title: '发布',
@@ -91,9 +102,9 @@ class List extends PureComponent {
                 title: '操作',
                 align: 'center',
                 key: 'action',
-                render: (text, record) => (
+                render: (text, record, index) => (
                     <span>
-                        <Button type="primary">发布</Button>
+                        <Button type="primary" onClick={ () => handleRelease(record.id, parseInt(record.is_show), index) }>{ parseInt(record.is_show) === 0 ? '发布文章' : '隐藏文章' }</Button>
                         <Divider type="vertical" />
                         <Button type="primary">编辑</Button>
                         <Divider type="vertical" />
@@ -153,6 +164,21 @@ const mapDispatch = dispatch => ({
             current: page,
             pageSize
         }))
+    },
+    handleRelease(id, is_show, index) {
+        Modal.confirm({
+            title: parseInt(is_show) === 0 ? '您确定要发布文章吗？' : '您确定要隐藏文章吗？',
+            content: '',
+            okText: '确认',
+            cancelText: '取消',
+            onOk() {
+                dispatch(actionCreators.handleRelease({
+                    id,
+                    is_show,
+                    index
+                }))
+            }
+        })
     }
 })
 
