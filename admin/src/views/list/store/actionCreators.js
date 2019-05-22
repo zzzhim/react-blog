@@ -19,12 +19,15 @@ const get_article_list = (params) => {
 
             if(status === 200) {
                 const arr = []
-                for(let item of data) {
+                for(let item of data.list) {
                     item.key = item.id
                     item.tags = item.tags.split(',')
                     arr.push(item)
                 }
-                resolve(arr)
+                resolve({
+                    list: arr,
+                    total: data.total
+                })
             }else {
                 message.error(data)
             }
@@ -53,7 +56,7 @@ export const handleChangePage = (params) => {
                 dispatch({
                     type: constants.CHANGE_PAGE,
                     value: {
-                        list: res,
+                        data: res,
                         current: params.current
                     }
                 })

@@ -21,9 +21,16 @@ export default (state = defaultState, action) => {
 
     switch(type) {
         case constants.GET_ARTICLE_LIST:
-            return state.set('articleList', action.value)
+            return state.merge({
+                'articleList': action.value.list,
+                'total': action.value.total,
+            })
         case constants.CHANGE_PAGE:
-            return state.set('current', action.value.current).set('articleList', action.value.list)
+            return state.merge({
+                'current': action.value.current,
+                'articleList': action.value.data.list,
+                'total': action.value.data.total,
+            })
         default:
             return state
     }

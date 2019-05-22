@@ -14,6 +14,10 @@ class UserModel {
     async getArticleList({ current, pageSize }) {
         return await query(`SELECT * FROM ARTICLE ORDER BY id DESC LIMIT ${current * pageSize - pageSize},${current * pageSize}`)
     }
+
+    async getArticleTotal() {
+        return await query(`SELECT id FROM ARTICLE`)
+    }
 };
 
 module.exports = new UserModel();
