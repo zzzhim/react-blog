@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 22/05/2019 14:25:35
+ Date: 22/05/2019 18:13:05
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,23 @@ CREATE TABLE `article`  (
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of article
+-- ----------------------------
+INSERT INTO `article` VALUES (1, '123', '213', '213', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p><img src=\"http://react-blog.oss-cn-hangzhou.aliyuncs.com/EWu3_TzsMpTCL4mdiK56Y1558504765074cp1.png\" alt=\"\" width=\"210\" height=\"171\" /></p>\n</body>\n</html>', 0, 0, '2019-05-22 14:30:48', '2019-05-22 14:31:05');
+INSERT INTO `article` VALUES (5, '1232', '213', '21323', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p><img src=\"http://react-blog.oss-cn-hangzhou.aliyuncs.com/EWu3_TzsMpTCL4mdiK56Y1558504765074cp1.png\" alt=\"\" width=\"210\" height=\"171\" /></p>\n</body>\n</html>', 0, 0, '2019-05-22 14:31:09', '2019-05-22 14:35:53');
+INSERT INTO `article` VALUES (7, '123', '123', '123', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>123</p>\n</body>\n</html>', 0, 0, '2019-05-22 15:01:29', '2019-05-22 15:01:29');
+INSERT INTO `article` VALUES (8, '213', '123', '123', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>123</p>\n</body>\n</html>', 0, 0, '2019-05-22 15:03:39', '2019-05-22 15:03:39');
+INSERT INTO `article` VALUES (9, '123', '213', '123', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>123</p>\n</body>\n</html>', 0, 0, '2019-05-22 15:18:38', '2019-05-22 15:18:38');
+INSERT INTO `article` VALUES (10, '213', '213', '213', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>123</p>\n</body>\n</html>', 0, 0, '2019-05-22 15:19:03', '2019-05-22 15:19:03');
+INSERT INTO `article` VALUES (11, '21312', '21321', '213213', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p><img src=\"http://react-blog.oss-cn-hangzhou.aliyuncs.com/WXDGJBfL1knzXrpi-6cKe1558510173996cp2.png\" alt=\"\" width=\"490\" height=\"311\" /></p>\n</body>\n</html>', 0, 0, '2019-05-22 15:29:38', '2019-05-22 15:29:38');
+INSERT INTO `article` VALUES (12, '123', '123', '12312', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>13</p>\n</body>\n</html>', 0, 0, '2019-05-22 16:41:58', '2019-05-22 16:41:58');
+INSERT INTO `article` VALUES (13, '1231', '3213', '123123', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>123213</p>\n</body>\n</html>', 0, 0, '2019-05-22 16:42:05', '2019-05-22 16:42:05');
+INSERT INTO `article` VALUES (14, '123', '12321', '123123', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>123</p>\n</body>\n</html>', 0, 0, '2019-05-22 16:42:10', '2019-05-22 16:42:10');
+INSERT INTO `article` VALUES (15, '12321', '3213', '312321', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>213213</p>\n</body>\n</html>', 0, 0, '2019-05-22 16:42:14', '2019-05-22 16:42:14');
+INSERT INTO `article` VALUES (16, '12312', '123213', '123123', '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>123123</p>\n</body>\n</html>', 0, 0, '2019-05-22 16:42:21', '2019-05-22 16:42:21');
 
 -- ----------------------------
 -- Table structure for user
