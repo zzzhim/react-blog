@@ -10,6 +10,10 @@ class UserModel {
         const { title, content, tags, Introduction } = article
         return await query(`INSERT INTO ARTICLE SET title='${title}', tags='${tags}', introduction='${Introduction}', content='${content}', read_nums=0, is_show=0`)
     }
+
+    async getArticleList({ current, pageSize }) {
+        return await query(`SELECT * FROM ARTICLE ORDER BY id DESC LIMIT ${current * pageSize - pageSize},${current * pageSize}`)
+    }
 };
 
 module.exports = new UserModel();
