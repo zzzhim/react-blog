@@ -1,3 +1,13 @@
-.color {
-    color: red;
+@import '../../styles/index.scss';
+
+.container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    display: block;
+
+    .table {
+        padding: 0 10px;
+        background-color: $--bg-white;
+    }
 }
