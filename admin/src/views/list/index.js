@@ -1,8 +1,9 @@
 /* eslint-disable no-script-url */
 import React, { PureComponent, Fragment } from 'react'
+import { connect } from 'react-redux'
 import { Table, Divider, Tag, Button } from 'antd'
 import style from './style.module.scss'
-import { request } from '../../utils'
+import { actionCreators } from './store'
 
 class List extends PureComponent {
     constructor(props) {
@@ -11,20 +12,16 @@ class List extends PureComponent {
     }
 
     componentDidMount() {
-        request({
-            url: '/get_article_list',
-            params: {
-                current: 1,
-                pageSize: 10
-            }
-        }).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log(err)
+        const { current, pageSize, getArticleList } = this.props
+        getArticleList({
+            current,
+            pageSize
         })
     }
 
     render() {
+        const { current, pageSize, list, total, handleChangePage } = this.props
+
         const columns = [
             {
                 title: 'id',
@@ -86,7 +83,7 @@ class List extends PureComponent {
                 key: 'is_show',
                 render: is_show => (
                     <span>
-                        { is_show ? '已发布' : '未发布' }
+                        { parseInt(is_show) === 1 ? '已发布' : '未发布' }
                     </span>
                 )
             },
@@ -106,41 +103,12 @@ class List extends PureComponent {
             },
         ]
 
-        const data = [
-            {
-                key: '1',
-                title: 'John Brown',
-                introduction: 'introduction',
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-                create_time: '2019-05-22 14:30:48',
-                update_time: '2019-05-22 14:31:05',
-                is_show: 0
-            },
-            {
-                key: '2',
-                title: 'John Brown',
-                introduction: 'introduction',
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-                create_time: '2019-05-22 14:30:48',
-                update_time: '2019-05-22 14:31:04',
-                is_show: 0
-            },
-            {
-                key: '3',
-                title: 'John Brown',
-                introduction: 'introduction',
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-                create_time: '2019-05-22 14:30:48',
-                update_time: '2019-05-22 14:31:09',
-                is_show: 0
-            },
-        ]
-
         const pagination = {
-            position: 'bottom'
+            position: 'bottom',
+            pageSize,
+            current,
+            total,
+            onChange: handleChangePage
         }
 
         const rowSelection = {
@@ -160,7 +128,7 @@ class List extends PureComponent {
                         <Table
                             rowSelection={rowSelection}
                             columns={columns}
-                            dataSource={data}
+                            dataSource={[...list]}
                             pagination={pagination}/>
                     </div>
                 </div>
@@ -169,4 +137,23 @@ class List extends PureComponent {
     }
 }
 
-export default List
+const mapState = state => ({
+    list: state.getIn(['articleList', 'articleList']),
+    current: state.getIn(['articleList', 'current']),
+    pageSize: state.getIn(['articleList', 'pageSize']),
+    total: state.getIn(['articleList', 'total'])
+})
+
+const mapDispatch = dispatch => ({
+    getArticleList(params) {
+        dispatch(actionCreators.getArticleList(params))
+    },
+    handleChangePage(page, pageSize) {
+        dispatch(actionCreators.handleChangePage({
+            current: page,
+            pageSize
+        }))
+    }
+})
+
+export default connect(mapState, mapDispatch)(List)
