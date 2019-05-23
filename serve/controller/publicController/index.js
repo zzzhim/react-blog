@@ -23,74 +23,105 @@ class PublicController {
                 });
 
                 try {
+                    console.log('上传图片开始')
                     const result = await client.putStream(nanoid()+ Date.now() + fileName, stream);
+                    console.log('上传图片结束')
                     resolve(result);
                 } catch (e) {
                     reject(e);
                 };
             })();
-        })
-
+        });
     }
 
     async uploadImage(ctx) {
-        const files = ctx.request.files.file;
-        console.log(files)
+        try {
+            const files = ctx.request.files.file;
+            let reader = fs.createReadStream(files.path);
+            let fileName = files.name;
+            await PublicController.upload(fileName, reader)
+                .then(res => {
+                    ctx.body = {
+                        status: 200,
+                        success: '成功',
+                        message: '图片上传成功',
+                        data: res
+                    };
+                })
+                .catch(err => {
+                    ctx.body = {
+                        status: 500,
+                        success: '失败',
+                        message: '图片上传失败',
+                        data: err
+                    };
+                })
+        }catch(err) {
+            ctx.body = {
+                status: 500,
+                success: '失败',
+                message: 'error code 500',
+                data: err
+            };
+        }
+    }
 
-        let reader = fs.createReadStream(files.path);
-        let fileName = files.name;
-        await PublicController.upload(fileName, reader)
-            .then(res => {
-                ctx.body = {
-                    "location": res.url
+    static media(fileName, stream) {
+        return new Promise((resolve, reject) => {
+            return (async () => {
+                const client = new OSS({
+                    region: region,
+                    accessKeyId: access_key,
+                    accessKeySecret: secret_key,
+                    bucket: bucket
+                });
+
+                try {
+                    const name = 'media/' + nanoid()+ Date.now() + fileName;
+                    console.log('上传文件开始')
+                    const result = await client.multipartUpload(name, stream, {
+                        progress: async function (p) {
+                            console.log('Progress: ' + p);
+                        }
+                    });
+                    let head = await client.head(name);
+                    console.log('上传文件结束')
+                    resolve(head);
+                } catch (e) {
+                    reject(e);
                 };
-            })
-            .catch(err => {
-                console.log(err)
-                ctx.body = {
-                    static: 500
-                };
-            })
-        // if(files instanceof Array){
-        //     for(let file of files){
-        //         let reader = fs.createReadStream(file.path);
-        //         let fileName = file.name;
-        //         await PublicController.upload(fileName, reader)
-        //             .then(res => {
-        //                 // ctx.body = {
-        //                 //     static: 200,
-        //                 //     data: {
-        //                 //         url: res.url
-        //                 //     }
-        //                 // };
-        //                 ctx.body = {
-        //                     "location": res.url
-        //                 };
-        //             })
-        //             .catch(err => {
-        //                 console.log(err)
-        //                 ctx.body = {
-        //                     static: 500
-        //                 };
-        //             })
-        //     };
-        // }else{
-        //     //单个文件的情况
-        //     let reader = fs.createReadStream(files.path);
-        //     let fileName = file.name;
-        //     PublicController.upload(fileName, reader)
-        //         .then(res => {
-        //             ctx.body = {
-        //                 "location": res.url
-        //             };
-        //         })
-        //         .catch(err => {
-        //             console.log(err)
-        //             ctx.body = {
-        //                 static: 500
-        //             };
-        //         })
-        // };
+            })();
+        });
+    }
+
+    async uploadMedia(ctx) {
+        try {
+            const files = ctx.request.files.file;
+            await PublicController.media(files.name, files.path)
+                .then(res => {
+                    ctx.body = {
+                        status: 200,
+                        success: '成功',
+                        message: '文件上传成功',
+                        data: res.res.requestUrls
+                    };
+                })
+                .catch(err => {
+                    ctx.body = {
+                        status: 500,
+                        success: '失败',
+                        message: '文件上传失败',
+                        data: err
+                    };
+                })
+        }catch(err) {
+            ctx.body = {
+                status: 500,
+                success: '失败',
+                message: 'error code 500',
+                data: err
+            };
+        }
     }
 }
 

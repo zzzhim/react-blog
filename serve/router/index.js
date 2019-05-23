@@ -22,7 +22,8 @@ router
 ;
 
 router
-    .post('/admin/uploadImage', PublicController.uploadImage)
+    .post('/admin/upload_image', checkToken, PublicController.uploadImage)
+    .post('/admin/upload_media', checkToken, PublicController.uploadMedia)
 ;
 
 router
