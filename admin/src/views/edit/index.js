@@ -4,13 +4,14 @@ import Editor from '../../components/tinymce'
 import { Button, Form, Input, Tag, Icon, message } from 'antd'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
-import release from '../../api/release'
+import { request } from '../../utils'
 
 class Release extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            tag: ''
+            tag: '',
+            save: false
         }
 
         this.handleChangeTag = this.handleChangeTag.bind(this)
@@ -19,13 +20,13 @@ class Release extends PureComponent {
     }
 
     componentDidMount() {
-        console.log(this.props.location)
-        this.props.getArticleDetails()
+        const { details } = this.props.location.state
+        this.props.getArticleDetails(details)
     }
 
     render() {
-        const { title, tags, Introduction, handleChangeTitle, handleChangeIntroduction, handleChangeEditor } = this.props
-        const { tag } = this.state
+        const { title, tags, Introduction, content, handleChangeTitle, handleChangeIntroduction, handleChangeEditor } = this.props
+        const { tag, save } = this.state
         return (
             <Fragment>
                 <div className={ style.container }>
@@ -74,12 +75,12 @@ class Release extends PureComponent {
                             labelAlign="left"
                             label="编辑">
                             {/* 富文本编辑器 */}
-                            <Editor handleChange={ handleChangeEditor } />
+                            <Editor initialValue={ content } handleChange={ handleChangeEditor } />
                         </Form.Item>
                         <Form.Item>
                             <div className={ style.btn }>
-                                <Button size="large" type="primary" onClick={ this.onSave }>保存</Button>
-                                <Button size="large" style={{ marginLeft: '20px' }} htmlType="button">取消</Button>
+                                <Button size="large" type="primary" loading={ save } onClick={ this.onSave }>保存</Button>
+                                <Button size="large" style={{ marginLeft: '20px' }} htmlType="button" onClick={ () => this.props.history.push('/layout/list') }>取消</Button>
                             </div>
                         </Form.Item>
                     </Form>
@@ -109,19 +110,40 @@ class Release extends PureComponent {
     }
 
     onSave() {
-        const { title, tags, Introduction, content } = this.props
-        release({
-            title,
-            tags: tags.join(','),
-            Introduction,
-            content
+        const { id, title, tags, Introduction, content } = this.props
+        const data = { id, title, tags: tags.join(','), Introduction, content }
+        this.setState({
+            save: true
+        })
+        request({
+            url: '/update_article',
+            method: 'post',
+            data
         }).then(res => {
-            this.props.history.push('/layout/list')
+            const { status, message: messages } = res.data
+            if(status === 200) {
+                message.success(messages)
+                this.setState({
+                    save: false
+                })
+                this.props.history.push('/layout/list')
+            }else {
+                this.setState({
+                    save: false
+                })
+                message.error(messages)
+            }
+        }).catch(err => {
+            console.log(err)
+            this.setState({
+                save: false
+            })
         })
     }
 }
 
 const mapState = state => ({
+    id: state.getIn(['articleEdit', 'id']),
     title: state.getIn(['articleEdit', 'title']),
     tags: state.getIn(['articleEdit', 'tags']),
     Introduction: state.getIn(['articleEdit', 'Introduction']),
@@ -129,8 +151,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-    getArticleDetails() {
-        console.log(1)
+    getArticleDetails(details) {
+        dispatch(actionCreators.getArticleDetails(details))
     },
     handleChangeTitle(e) {
         dispatch(actionCreators.handleChangeTitle(e.target.value))

@@ -9,6 +9,8 @@ class Release extends Component {
     }
 
     render() {
+        const { initialValue } = this.props
+
         return (
             <Fragment>
                     <Editor
@@ -40,6 +42,7 @@ class Release extends Component {
                             'preview',
                             'wordcount',
                         ]}
+                        initialValue={ initialValue || '' }
                         onEditorChange={this.handleEditorChange}
                     />
             </Fragment>

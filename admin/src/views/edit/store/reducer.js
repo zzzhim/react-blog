@@ -10,6 +10,7 @@ import { fromJS } from 'immutable'
 import * as constants from './constants'
 
 const defaultState = fromJS({
+    id: '',
     title: '',
     tags: [],
     Introduction: '',
@@ -20,6 +21,14 @@ export default (state = defaultState, action) => {
     const { type } = action
 
     switch(type) {
+        case constants.CHANGE_DETAILS:
+            return state.merge({
+                id: action.value.id,
+                title: action.value.title,
+                tags: action.value.tags,
+                Introduction: action.value.introduction,
+                content: action.value.content
+            })
         case constants.CHANGE_TITLE:
             return state.set('title', action.value)
         case constants.CHANGE_TAGS:

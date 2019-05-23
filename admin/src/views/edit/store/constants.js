@@ -6,6 +6,8 @@
  * @LastEditors: Please set LastEditors
  */
 
+export const CHANGE_DETAILS = 'articleEdit/change_details'
+
 export const CHANGE_TITLE = 'articleEdit/change_title'
 
 export const CHANGE_TAGS = 'articleEdit/change_tags'

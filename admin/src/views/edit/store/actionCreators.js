@@ -8,11 +8,19 @@
 
 import * as constants from './constants'
 
+export const getArticleDetails = details => {
+    return dispatch => {
+        dispatch({
+            type: constants.CHANGE_DETAILS,
+            value: details
+        })
+    }
+}
+
 const changeTitle = value => ({
     type: constants.CHANGE_TITLE,
     value
 })
-
 
 export const handleChangeTitle = value => {
     return dispatch => {

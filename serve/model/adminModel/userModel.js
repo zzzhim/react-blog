@@ -29,6 +29,10 @@ class UserModel {
     async is_show(id, is_show) {
         return await query(`UPDATE ARTICLE SET is_show='${is_show}' WHERE id=${id}`)
     }
+
+    async update_article({ id, title, tags, Introduction, content }) {
+        return await query(`UPDATE ARTICLE SET title='${title}', tags='${tags}', introduction='${Introduction}', content='${content}' WHERE id=${id}`)
+    }
 };
 
 module.exports = new UserModel();

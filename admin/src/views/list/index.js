@@ -8,6 +8,7 @@
 /* eslint-disable no-script-url */
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Table, Divider, Tag, Button, Modal } from 'antd'
 import style from './style.module.scss'
 import { actionCreators } from './store'
@@ -106,7 +107,22 @@ class List extends PureComponent {
                     <span>
                         <Button type="primary" onClick={ () => handleRelease(record.id, parseInt(record.is_show), index) }>{ parseInt(record.is_show) === 0 ? '发布文章' : '隐藏文章' }</Button>
                         <Divider type="vertical" />
-                        <Button type="primary">编辑</Button>
+                        <Link to={{
+                                pathname: "/layout/edit",
+                                search: "",
+                                hash: "",
+                                state: {
+                                    details: {
+                                        id: record.id,
+                                        title: record.title,
+                                        tags: record.tags,
+                                        introduction: record.introduction,
+                                        content: record.content
+                                    }
+                                }
+                            }}>
+                            <Button type="primary">编辑</Button>
+                        </Link>
                         <Divider type="vertical" />
                         <Button type="danger">删除</Button>
                     </span>

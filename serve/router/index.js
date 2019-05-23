@@ -9,6 +9,7 @@ const Router = require('koa-router');
 const { base_url } = require('../config/index');
 const AdminController = require('../controller/adminController/index');
 const get_article_list = require('../controller/adminController/get_article_list.js');
+const update_article = require('../controller/adminController/update_article.js');
 const PublicController = require('../controller/publicController/index');
 const checkToken = require('../utils/checkToken');
 
@@ -27,6 +28,7 @@ router
 router
     .post('/admin/login', AdminController.login)
     .post('/admin/release', checkToken, AdminController.release)
+    .post('/admin/update_article', checkToken, update_article)
     .post('/admin/is_show', checkToken, AdminController.is_show)
 ;
 
