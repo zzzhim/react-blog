@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-20 23:51:23
- * @LastEditTime: 2019-05-22 20:12:43
+ * @LastEditTime: 2019-05-23 18:53:01
  * @LastEditors: Please set LastEditors
  */
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
         host: '127.0.0.1',
         port: 3306,
         user: 'root',
-        password: '123456',
+        password: 'qq123456',
         multipleStatements: true // 必须加上这句话,不然的话就无法执行多条sql语句
     },
     dbName: 'my_blog',

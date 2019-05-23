@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-21 22:14:50
- * @LastEditTime: 2019-05-23 01:40:29
+ * @LastEditTime: 2019-05-23 18:31:07
  * @LastEditors: Please set LastEditors
  */
 import React, { Component, Fragment } from 'react'
@@ -28,10 +28,10 @@ class Aside extends Component {
                     defaultOpenKeys={['article']}
                     mode="inline"
                     >
-                    <Menu.Item key="tag">
+                    {/* <Menu.Item key="tag">
                         <Icon type="pie-chart" />
                         <span>标签</span>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     <SubMenu
                         key="article"
                         title={
@@ -62,7 +62,7 @@ class Aside extends Component {
                                     state: { name: '发布文章' }
                                 }}
                                 >
-                                发布文章
+                                添加文章
                             </Link>
                         </Menu.Item>
                     </SubMenu>

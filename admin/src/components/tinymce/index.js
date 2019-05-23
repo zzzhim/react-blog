@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-05-21 22:14:50
+ * @LastEditTime: 2019-05-23 21:22:36
+ * @LastEditors: Please set LastEditors
+ */
 import React, { Component, Fragment } from 'react'
 import { Editor } from '@tinymce/tinymce-react'
 import { request } from '../../utils'
@@ -95,6 +102,9 @@ class Release extends Component {
                             'undo redo | styleselect | bold italic | link image media | insertdatetime | charmap',
                             'alignleft aligncenter alignright',
                             "table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol",
+                            "advlist autolink lists print anchor",
+                            "searchreplace visualblocks code",
+                            "paste imagetools wordcount",
                             'wordcount',
                         ]
                     }
@@ -108,7 +118,10 @@ class Release extends Component {
                         'preview',
                         'wordcount',
                         'table',
-                        'insertdatetime'
+                        'insertdatetime',
+                        "advlist autolink lists print anchor",
+                        "searchreplace visualblocks code",
+                        "paste imagetools wordcount",
                     ]}
                     initialValue={ initialValue || '' }
                     onEditorChange={this.handleEditorChange}
