@@ -5,15 +5,16 @@
  * @LastEditTime: 2019-05-23 01:44:07
  * @LastEditors: Please set LastEditors
  */
-import React, { Component, Fragment } from 'react'
-import { Route } from 'react-router-dom'
+import React, { PureComponent, Fragment } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import { Layout, Button, Icon } from 'antd'
 import List from '../list'
 import Release from '../release'
+import Edit from '../edit'
 import Aside from './components/aside/index'
 const { Header, Content, Footer, Sider } = Layout
 
-class Layouts extends Component {
+class Layouts extends PureComponent {
     constructor(props) {
         super(props)
         this.state = { collapsed: false }
@@ -41,8 +42,11 @@ class Layouts extends Component {
                         <Header style={{ background: '#fff' }}>
                         </Header>
                         <Content>
-                            <Route exact path="/layout/list" component={ List }></Route>
-                            <Route exact path="/layout/release" component={ Release }></Route>
+                            <Switch>
+                                <Route exact path="/layout/list" component={ List }></Route>
+                                <Route exact path="/layout/release" component={ Release }></Route>
+                                <Route exact path="/layout/edit" component={ Edit }></Route>
+                            </Switch>
                         </Content>
                         <Footer />
                     </Layout>

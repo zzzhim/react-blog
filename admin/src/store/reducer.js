@@ -9,13 +9,15 @@
 import { combineReducers } from 'redux-immutable'
 import { reducer as loginReducer }  from '../views/login/store'
 import { reducer as releaseReducer }  from '../views/release/store'
+import { reducer as articleEditReducer }  from '../views/edit/store'
 import { reducer as articleListReducer }  from '../views/list/store'
 
 // 生成一个不可更改对象
 const reducer = combineReducers({
     login: loginReducer,
     release: releaseReducer,
-    articleList: articleListReducer
+    articleList: articleListReducer,
+    articleEdit: articleEditReducer
 })
 
 export default reducer
