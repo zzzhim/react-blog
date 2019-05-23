@@ -31,6 +31,16 @@ export const handleChangeTags = value => {
     }
 }
 
+export const handleChangeDeleteTag = (tags, index) => {
+    return dispatch => {
+        const value = tags.remove(index)
+        dispatch({
+            type: constants.CHANGE_REMOVE,
+            value,
+        })
+    }
+}
+
 const Introduction = value => ({
     type: constants.CHANGE_INTRODUCTION,
     value

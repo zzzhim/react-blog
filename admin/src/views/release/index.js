@@ -27,7 +27,7 @@ class Release extends PureComponent {
     }
 
     render() {
-        const { title, tags, Introduction, handleChangeTitle, handleChangeIntroduction, handleChangeEditor } = this.props
+        const { title, tags, Introduction, handleChangeTitle, handleChangeIntroduction, handleChangeEditor, handleChangeDeleteTag } = this.props
         const { tag, loading } = this.state
         return (
             <Fragment>
@@ -45,7 +45,7 @@ class Release extends PureComponent {
                                     return (
                                         <Tag color="#1890ff" key={i}>
                                             { v }
-                                            <Icon style={{ marginLeft: 5 }} type="close" />
+                                            <Icon onClick={ () => handleChangeDeleteTag(tags, i) } style={{ marginLeft: 5 }} type="close" />
                                         </Tag>
                                     )
                                 })
@@ -156,6 +156,9 @@ const mapDispatch = dispatch => ({
     },
     handleChangeTags(value) {
         dispatch(actionCreators.handleChangeTags(value))
+    },
+    handleChangeDeleteTag(tags, index) {
+        dispatch(actionCreators.handleChangeDeleteTag(tags, index))
     },
     handleChangeIntroduction(e) {
         dispatch(actionCreators.handleChangeIntroduction(e.target.value))

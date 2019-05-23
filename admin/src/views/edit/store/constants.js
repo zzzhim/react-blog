@@ -12,6 +12,8 @@ export const CHANGE_TITLE = 'articleEdit/change_title'
 
 export const CHANGE_TAGS = 'articleEdit/change_tags'
 
+export const CHANGE_REMOVE = 'articleEdit/change_remove'
+
 export const CHANGE_INTRODUCTION = 'articleEdit/change_introduction'
 
 export const CHANGE_EDITOR = 'articleEdit/change_editor'

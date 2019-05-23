@@ -26,6 +26,8 @@ export default (state = defaultState, action) => {
             return state.merge({
                 tags: state.get('tags').push(action.value)
             })
+        case constants.CHANGE_REMOVE:
+            return state.set('tags', action.value)
         case constants.CHANGE_INTRODUCTION:
             return state.set('Introduction', action.value)
         case constants.CHANGE_EDITOR:
