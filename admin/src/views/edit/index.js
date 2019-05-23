@@ -11,7 +11,7 @@ class Release extends PureComponent {
         super(props)
         this.state = {
             tag: '',
-            save: false
+            loading: false
         }
 
         this.handleChangeTag = this.handleChangeTag.bind(this)
@@ -26,7 +26,7 @@ class Release extends PureComponent {
 
     render() {
         const { title, tags, Introduction, content, handleChangeTitle, handleChangeIntroduction, handleChangeEditor } = this.props
-        const { tag, save } = this.state
+        const { tag, loading } = this.state
         return (
             <Fragment>
                 <div className={ style.container }>
@@ -79,7 +79,7 @@ class Release extends PureComponent {
                         </Form.Item>
                         <Form.Item>
                             <div className={ style.btn }>
-                                <Button size="large" type="primary" loading={ save } onClick={ this.onSave }>保存</Button>
+                                <Button size="large" type="primary" loading={ loading } onClick={ this.onSave }>保存</Button>
                                 <Button size="large" style={{ marginLeft: '20px' }} htmlType="button" onClick={ () => this.props.history.push('/layout/list') }>取消</Button>
                             </div>
                         </Form.Item>
@@ -101,6 +101,7 @@ class Release extends PureComponent {
 
     handleChangeTags(value) {
         const tags  = this.props.tags
+        console.log(tags)
 
         if(!tags.includes(value) && tags.size < 5) {
             this.props.handleChangeTags(value)
@@ -113,7 +114,7 @@ class Release extends PureComponent {
         const { id, title, tags, Introduction, content } = this.props
         const data = { id, title, tags: tags.join(','), Introduction, content }
         this.setState({
-            save: true
+            loading: true
         })
         request({
             url: '/update_article',
@@ -124,19 +125,19 @@ class Release extends PureComponent {
             if(status === 200) {
                 message.success(messages)
                 this.setState({
-                    save: false
+                    loading: false
                 })
                 this.props.history.push('/layout/list')
             }else {
                 this.setState({
-                    save: false
+                    loading: false
                 })
                 message.error(messages)
             }
         }).catch(err => {
             console.log(err)
             this.setState({
-                save: false
+                loading: false
             })
         })
     }

@@ -11,13 +11,14 @@ import Editor from '../../components/tinymce'
 import { Button, Form, Input, Tag, Icon, message } from 'antd'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
-import release from '../../api/release'
+import { request } from '../../utils'
 
 class Release extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            tag: ''
+            tag: '',
+            loading: false
         }
 
         this.handleChangeTag = this.handleChangeTag.bind(this)
@@ -27,7 +28,7 @@ class Release extends PureComponent {
 
     render() {
         const { title, tags, Introduction, handleChangeTitle, handleChangeIntroduction, handleChangeEditor } = this.props
-        const { tag } = this.state
+        const { tag, loading } = this.state
         return (
             <Fragment>
                 <div className={ style.container }>
@@ -80,8 +81,8 @@ class Release extends PureComponent {
                         </Form.Item>
                         <Form.Item>
                             <div className={ style.btn }>
-                                <Button size="large" type="primary" onClick={ this.onSave }>保存</Button>
-                                <Button size="large" style={{ marginLeft: '20px' }} htmlType="button">取消</Button>
+                                <Button size="large" type="primary" loading={ loading } onClick={ this.onSave }>保存</Button>
+                                <Button size="large" style={{ marginLeft: '20px' }} htmlType="button" onClick={ () => this.props.history.push('/layout/list') }>取消</Button>
                             </div>
                         </Form.Item>
                     </Form>
@@ -112,13 +113,32 @@ class Release extends PureComponent {
 
     onSave() {
         const { title, tags, Introduction, content } = this.props
-        release({
+        this.setState({ loading: true })
+
+        const data = {
             title,
             tags: tags.join(','),
             Introduction,
             content
+        }
+
+        request({
+            url: '/release',
+            method: 'post',
+            data
         }).then(res => {
-            this.props.history.push('/layout/list')
+            const { status, data } = res.data
+            if(status === 200) {
+                message.success(data)
+                this.setState({ loading: false })
+                this.props.history.push('/layout/list')
+            }else {
+                message.error(data)
+                this.setState({ loading: false })
+            }
+        }).catch(err => {
+            this.setState({ loading: false })
+            console.log(err)
         })
     }
 }

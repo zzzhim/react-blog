@@ -37,6 +37,7 @@ class List extends PureComponent {
                 dataIndex: 'key',
                 key: 'key',
                 align: 'center',
+                width: 100,
                 sorter: (a, b) => a.id - b.id
             },
             {
@@ -44,14 +45,17 @@ class List extends PureComponent {
                 dataIndex: 'title',
                 key: 'title',
                 align: 'center',
+                width: 100,
                 // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                render: title => <a href="javascript:;">{title}</a>,
+                render: title => <a href="javascript:;"><div className={ style.title }>{title}</div></a>,
             },
             {
                 title: '简介',
                 dataIndex: 'introduction',
                 align: 'center',
                 key: 'introduction',
+                width: 300,
+                render: introduction => <div className={ style.introduction }>{introduction}</div>,
             },
             {
                 title: '标签',
@@ -73,6 +77,17 @@ class List extends PureComponent {
                 ),
             },
             {
+                title: '发布',
+                dataIndex: 'is_show',
+                align: 'center',
+                key: 'is_show',
+                render: is_show => (
+                    <span>
+                        { parseInt(is_show) === 1 ? '已发布' : '未发布' }
+                    </span>
+                )
+            },
+            {
                 title: '创建时间',
                 dataIndex: 'create_time',
                 align: 'center',
@@ -89,19 +104,9 @@ class List extends PureComponent {
                 render: update_time => (<span>{ dayjs(update_time).format('YYYY-MM-DD HH:mm:ss') }</span>)
             },
             {
-                title: '发布',
-                dataIndex: 'is_show',
-                align: 'center',
-                key: 'is_show',
-                render: is_show => (
-                    <span>
-                        { parseInt(is_show) === 1 ? '已发布' : '未发布' }
-                    </span>
-                )
-            },
-            {
                 title: '操作',
                 align: 'center',
+                fixed: 'right',
                 key: 'action',
                 render: (text, record, index) => (
                     <span>
@@ -154,6 +159,7 @@ class List extends PureComponent {
                     <div className={style.table}>
                         <Table
                             rowSelection={rowSelection}
+                            scroll={{ x: 2300 }}
                             columns={columns}
                             dataSource={[...list]}
                             pagination={pagination}/>

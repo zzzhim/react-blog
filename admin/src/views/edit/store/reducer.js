@@ -22,7 +22,7 @@ export default (state = defaultState, action) => {
 
     switch(type) {
         case constants.CHANGE_DETAILS:
-            return state.merge({
+            return fromJS({
                 id: action.value.id,
                 title: action.value.title,
                 tags: action.value.tags,

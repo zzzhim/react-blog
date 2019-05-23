@@ -9,5 +9,15 @@
     .table {
         padding: 0 10px;
         background-color: $--bg-white;
+
+        .title {
+            width: 100px;
+            @include mixin-textHidden;
+        }
+
+        .introduction {
+            width: 300px;
+            @include mixin-textHidden;
+        }
     }
 }
