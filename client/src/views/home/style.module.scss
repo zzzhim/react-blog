@@ -1,0 +1,8 @@
+@import '../../styles/index.scss';
+
+
+.ellipsis {
+    width: 1300px;
+    display: block;
+    @include mixin-textHidden;
+}

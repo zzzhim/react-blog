@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-23 21:27:25
- * @LastEditTime: 2019-05-23 21:53:47
+ * @LastEditTime: 2019-05-24 00:01:03
  * @LastEditors: Please set LastEditors
  */
 import React from 'react'
@@ -10,6 +10,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import './styles/reset.css'
+import 'antd/dist/antd.css'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
