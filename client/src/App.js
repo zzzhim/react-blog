@@ -2,13 +2,14 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-23 21:27:25
- * @LastEditTime: 2019-05-23 22:34:23
+ * @LastEditTime: 2019-05-26 01:27:30
  * @LastEditors: Please set LastEditors
  */
 import React, { PureComponent } from 'react'
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import  Layout from './components/layout'
 import Home from './views/home'
+import Detail from './views/detail'
 
 class App extends PureComponent {
     render() {
@@ -20,6 +21,14 @@ class App extends PureComponent {
                             props  => (
                                 <Layout>
                                     <Home { ...props  }></Home>
+                                </Layout>
+                            )
+                        }>
+                    </Route>
+                    <Route exact path="/detail" render={
+                            props  => (
+                                <Layout>
+                                    <Detail { ...props  }></Detail>
                                 </Layout>
                             )
                         }>

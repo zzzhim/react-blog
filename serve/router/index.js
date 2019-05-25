@@ -2,13 +2,14 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-20 23:51:23
- * @LastEditTime: 2019-05-24 00:08:33
+ * @LastEditTime: 2019-05-26 01:49:26
  * @LastEditors: Please set LastEditors
  */
 const Router = require('koa-router');
 const { base_url } = require('../config/index');
 const AdminController = require('../controller/adminController/index');
 const get_article_list = require('../controller/adminController/get_article_list.js');
+const client_get_article_list = require('../controller/clinetController/get_article_list.js');
 const update_article = require('../controller/adminController/update_article.js');
 const PublicController = require('../controller/publicController/index');
 const checkToken = require('../utils/checkToken');
@@ -20,7 +21,7 @@ const router = new Router({
 router
     // .get('/admin/get_article_list', checkToken, get_article_list)
     .get('/admin/get_article_list', checkToken, get_article_list)
-    .get('/client/get_article_list', get_article_list)
+    .get('/client/get_article_list', client_get_article_list)
 ;
 
 router
