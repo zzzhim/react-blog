@@ -18,7 +18,7 @@ class App extends PureComponent {
                 <Switch>
                     <Redirect exact from="/" to="/home"></Redirect>
                     <Route exact path="/home" render={
-                            props  => (
+                            props => (
                                 <Layout>
                                     <Home { ...props  }></Home>
                                 </Layout>
@@ -26,7 +26,7 @@ class App extends PureComponent {
                         }>
                     </Route>
                     <Route exact path="/detail" render={
-                            props  => (
+                            props => (
                                 <Layout>
                                     <Detail { ...props  }></Detail>
                                 </Layout>

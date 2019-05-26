@@ -2,15 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-05-21 22:14:50
- * @LastEditTime: 2019-05-23 01:44:07
+ * @LastEditTime: 2019-05-26 22:12:00
  * @LastEditors: Please set LastEditors
  */
 import React, { PureComponent, Fragment } from 'react'
-import { Route, Switch } from 'react-router-dom'
 import { Layout, Button, Icon } from 'antd'
-import List from '../list'
-import Release from '../release'
-import Edit from '../edit'
 import Aside from './components/aside/index'
 const { Header, Content, Footer, Sider } = Layout
 
@@ -26,7 +22,6 @@ class Layouts extends PureComponent {
     }
 
     render() {
-
         return (
             <Fragment>
                 <Layout>
@@ -42,11 +37,7 @@ class Layouts extends PureComponent {
                         <Header style={{ background: '#fff' }}>
                         </Header>
                         <Content>
-                            <Switch>
-                                <Route exact path="/layout/list" component={ List }></Route>
-                                <Route exact path="/layout/release" component={ Release }></Route>
-                                <Route exact path="/layout/edit" component={ Edit }></Route>
-                            </Switch>
+                            { this.props.children }
                         </Content>
                         <Footer />
                     </Layout>
